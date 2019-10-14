@@ -24,8 +24,9 @@ var ARROW_WIDTH_HALF = 8;
  * @param {HTMLElement} container - container element
  * @param {Array.<Calendar>} calendars - calendar list used to create new schedule
  * @param {boolean} usageStatistics - GA tracking options in Calendar
+ * @param services
  */
-function ScheduleCreationPopup(container, calendars, usageStatistics) {
+function ScheduleCreationPopup(container, calendars, usageStatistics, services) {
     View.call(this, container);
     /**
      * @type {FloatingLayer}
@@ -38,8 +39,10 @@ function ScheduleCreationPopup(container, calendars, usageStatistics) {
      */
     this._viewModel = null;
     this._selectedCal = null;
+    this._selectedService = null;
     this._schedule = null;
     this.calendars = calendars;
+    this.services = services;
     this._focusedDropdown = null;
     this._usageStatistics = usageStatistics;
     this._onClickListeners = [
@@ -104,6 +107,7 @@ ScheduleCreationPopup.prototype._onClick = function(clickEvent) {
  */
 ScheduleCreationPopup.prototype._closePopup = function(target) {
     var className = config.classname('popup-close');
+
 
     if (domutil.hasClass(target, className) || domutil.closest(target, '.' + className)) {
         this.hide();
@@ -187,6 +191,13 @@ ScheduleCreationPopup.prototype._selectDropdownMenuItem = function(target) {
         });
     }
 
+    if (domutil.hasClass(dropdown, config.classname('section-services'))) {
+        domutil.find('.' + iconClassName, dropdownBtn).style.backgroundColor = bgColor;
+        this._selectedService = common.find(this.services, function(service) {
+            return service.id === domutil.getData(selectedItem, 'serviceId');
+        });
+    }
+
     domutil.removeClass(dropdown, config.classname('open'));
 
     return true;
@@ -243,7 +254,7 @@ ScheduleCreationPopup.prototype._toggleIsPrivate = function(target) {
 ScheduleCreationPopup.prototype._onClickSaveSchedule = function(target) {
     var className = config.classname('popup-save');
     var cssPrefix = config.cssPrefix;
-    var title, isPrivate, location, isAllDay, startDate, endDate, state;
+    var title, isPrivate, service, isAllDay, startDate, endDate;
     var start, end, calendarId;
 
     if (!domutil.hasClass(target, className) && !domutil.closest(target, '.' + className)) {
@@ -264,9 +275,7 @@ ScheduleCreationPopup.prototype._onClickSaveSchedule = function(target) {
         return true;
     }
 
-    isPrivate = !domutil.hasClass(domutil.get(cssPrefix + 'schedule-private'), config.classname('public'));
-    location = domutil.get(cssPrefix + 'schedule-location');
-    state = domutil.get(cssPrefix + 'schedule-state');
+    service = domutil.get(cssPrefix + 'schedule-services');
     isAllDay = !!domutil.get(cssPrefix + 'schedule-allday').checked;
 
     if (isAllDay) {
@@ -286,14 +295,10 @@ ScheduleCreationPopup.prototype._onClickSaveSchedule = function(target) {
             schedule: {
                 calendarId: calendarId || this._schedule.calendarId,
                 title: title.value,
-                location: location.value,
-                raw: {
-                    class: isPrivate ? 'private' : 'public'
-                },
                 start: start,
                 end: end,
                 isAllDay: isAllDay,
-                state: state.innerText,
+                service: service.innerText,
                 triggerEventName: 'click',
                 id: this._schedule.id
             },
@@ -311,14 +316,10 @@ ScheduleCreationPopup.prototype._onClickSaveSchedule = function(target) {
         this.fire('beforeCreateSchedule', {
             calendarId: calendarId,
             title: title.value,
-            location: location.value,
-            raw: {
-                class: isPrivate ? 'private' : 'public'
-            },
             start: start,
             end: end,
             isAllDay: isAllDay,
-            state: state.innerText
+            service: service.innerText
         });
     }
 
@@ -333,6 +334,7 @@ ScheduleCreationPopup.prototype._onClickSaveSchedule = function(target) {
  */
 ScheduleCreationPopup.prototype.render = function(viewModel) {
     var calendars = this.calendars;
+    var services = this.services;
     var layer = this.layer;
     var self = this;
     var boxElement, guideElements;
@@ -341,6 +343,11 @@ ScheduleCreationPopup.prototype.render = function(viewModel) {
     viewModel.calendars = calendars;
     if (calendars.length) {
         viewModel.selectedCal = this._selectedCal = calendars[0];
+    }
+
+    viewModel.services = services;
+    if (services.length) {
+        viewModel.selectedService = this._selectedService = services[0];
     }
 
     this._isEditMode = viewModel.schedule && viewModel.schedule.id;
@@ -372,21 +379,24 @@ ScheduleCreationPopup.prototype.render = function(viewModel) {
  */
 ScheduleCreationPopup.prototype._makeEditModeData = function(viewModel) {
     var schedule = viewModel.schedule;
-    var title, isPrivate, location, startDate, endDate, isAllDay, state;
+    var title, service, startDate, endDate, isAllDay;
     var raw = schedule.raw || {};
     var calendars = this.calendars;
+    var services = this.services;
 
     var id = schedule.id;
     title = schedule.title;
-    isPrivate = raw['class'] === 'private';
-    location = schedule.location;
     startDate = schedule.start;
     endDate = schedule.end;
     isAllDay = schedule.isAllDay;
-    state = schedule.state;
+    service = schedule.service;
 
     viewModel.selectedCal = this._selectedCal = common.find(this.calendars, function(cal) {
         return cal.id === viewModel.schedule.calendarId;
+    });
+
+    viewModel.selectedService = this._selectedService = common.find(this.services, function(service) {
+        return service.id === viewModel.schedule.service;
     });
 
     this._schedule = schedule;
@@ -396,15 +406,10 @@ ScheduleCreationPopup.prototype._makeEditModeData = function(viewModel) {
         selectedCal: this._selectedCal,
         calendars: calendars,
         title: title,
-        isPrivate: isPrivate,
-        location: location,
+        service: service,
         isAllDay: isAllDay,
-        state: state,
         start: startDate,
         end: endDate,
-        raw: {
-            class: isPrivate ? 'private' : 'public'
-        },
         zIndex: this.layer.zIndex + 5,
         isEditMode: this._isEditMode
     };
@@ -609,6 +614,14 @@ ScheduleCreationPopup.prototype.refresh = function() {
  */
 ScheduleCreationPopup.prototype.setCalendars = function(calendars) {
     this.calendars = calendars || [];
+};
+
+/**
+ * Set calendar list
+ * @param {Array.<Object>} services - service list
+ */
+ScheduleCreationPopup.prototype.setServices = function(services) {
+    this.services = services || [];
 };
 
 module.exports = ScheduleCreationPopup;

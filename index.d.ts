@@ -233,6 +233,7 @@ export interface IOptions {
     disableClick?: boolean;
     isReadOnly?: boolean;
     usageStatistics?: boolean;
+    services?: Object[];
 }
 
 export default class Calendar {
@@ -261,6 +262,7 @@ export default class Calendar {
     public scrollToNow(): void;
     public setCalendarColor(calendarId: string, option: ICalendarColor, silent?: boolean): void;
     public setCalendars(calendars: ICalendarInfo[]): void;
+    public setServices(services: Object[]): void;
     public setDate(date: Date | string): void;
     public setOptions(options: IOptions, silent?: boolean): void;
     public setTheme(theme: ITheme): string[];
