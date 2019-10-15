@@ -115,7 +115,8 @@ function createMonthView(baseController, layoutContainer, dragHandler, options) 
 
     // binding popup for schedules creation
     if (options.useCreationPopup) {
-        createView = new ScheduleCreationPopup(layoutContainer, baseController.calendars, options.usageStatistics, options.services);
+        createView = new ScheduleCreationPopup(layoutContainer, baseController.calendars,
+            options.usageStatistics, options.services);
 
         onSaveNewSchedule = function(scheduleData) {
             creationHandler.fire('beforeCreateSchedule', util.extend(scheduleData, {

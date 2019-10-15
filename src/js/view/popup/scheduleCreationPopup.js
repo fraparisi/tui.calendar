@@ -24,7 +24,7 @@ var ARROW_WIDTH_HALF = 8;
  * @param {HTMLElement} container - container element
  * @param {Array.<Calendar>} calendars - calendar list used to create new schedule
  * @param {boolean} usageStatistics - GA tracking options in Calendar
- * @param services
+ * @param {Array.<Object>}services - List of services
  */
 function ScheduleCreationPopup(container, calendars, usageStatistics, services) {
     View.call(this, container);
@@ -107,7 +107,6 @@ ScheduleCreationPopup.prototype._onClick = function(clickEvent) {
  */
 ScheduleCreationPopup.prototype._closePopup = function(target) {
     var className = config.classname('popup-close');
-
 
     if (domutil.hasClass(target, className) || domutil.closest(target, '.' + className)) {
         this.hide();
@@ -254,7 +253,7 @@ ScheduleCreationPopup.prototype._toggleIsPrivate = function(target) {
 ScheduleCreationPopup.prototype._onClickSaveSchedule = function(target) {
     var className = config.classname('popup-save');
     var cssPrefix = config.cssPrefix;
-    var title, isPrivate, service, isAllDay, startDate, endDate;
+    var title, service, isAllDay, startDate, endDate;
     var start, end, calendarId;
 
     if (!domutil.hasClass(target, className) && !domutil.closest(target, '.' + className)) {
@@ -380,9 +379,7 @@ ScheduleCreationPopup.prototype.render = function(viewModel) {
 ScheduleCreationPopup.prototype._makeEditModeData = function(viewModel) {
     var schedule = viewModel.schedule;
     var title, service, startDate, endDate, isAllDay;
-    var raw = schedule.raw || {};
     var calendars = this.calendars;
-    var services = this.services;
 
     var id = schedule.id;
     title = schedule.title;
@@ -395,8 +392,8 @@ ScheduleCreationPopup.prototype._makeEditModeData = function(viewModel) {
         return cal.id === viewModel.schedule.calendarId;
     });
 
-    viewModel.selectedService = this._selectedService = common.find(this.services, function(service) {
-        return service.id === viewModel.schedule.service;
+    viewModel.selectedService = this._selectedService = common.find(this.services, function(serv) {
+        return serv.id === viewModel.schedule.service;
     });
 
     this._schedule = schedule;
