@@ -19626,13 +19626,6 @@ ScheduleCreationPopup.prototype._onClickSaveSchedule = function(target) {
         return true;
     }
 
-    isAllDay = !!domutil.get(cssPrefix + 'schedule-allday').checked;
-
-    if (isAllDay) {
-        startDate.setHours(0, 0, 0);
-        endDate.setHours(23, 59, 59);
-    }
-
     start = new TZDate(startDate);
     end = new TZDate(endDate);
 
@@ -19673,7 +19666,7 @@ ScheduleCreationPopup.prototype._onClickSaveSchedule = function(target) {
             title: title.value,
             start: start,
             end: end,
-            isAllDay: isAllDay,
+            isAllDay: false,
             service: serviceId
         });
     }
