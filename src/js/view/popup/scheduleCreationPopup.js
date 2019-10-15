@@ -386,7 +386,7 @@ ScheduleCreationPopup.prototype._makeEditModeData = function(viewModel) {
     endDate = schedule.end;
 
     viewModel.selectedCal = this._selectedCal = common.find(this.calendars, function(cal) {
-        return !cal.isReadOnly && cal.id === viewModel.schedule.calendarId;
+        return cal.id === viewModel.schedule.calendarId;
     });
 
     viewModel.selectedService = this._selectedService = common.find(this.services, function(service) {
