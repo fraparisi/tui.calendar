@@ -300,7 +300,7 @@ ScheduleCreationPopup.prototype._onClickSaveSchedule = function(target) {
                 start: start,
                 end: end,
                 isAllDay: isAllDay,
-                service: serviceId || this._schedule.serviceId,
+                serviceId: serviceId || this._schedule.serviceId,
                 triggerEventName: 'click',
                 id: this._schedule.id
             },

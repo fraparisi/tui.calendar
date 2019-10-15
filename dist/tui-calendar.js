@@ -10204,6 +10204,7 @@ function createMonthView(baseController, layoutContainer, dragHandler, options) 
         if (options.useCreationPopup) {
             onShowEditPopup = function(eventData) {
                 createView.setCalendars(baseController.calendars);
+                createView.setServices(options.services);
                 createView.render(eventData);
             };
             createView.on('beforeUpdateSchedule', onEditSchedule);
@@ -19651,7 +19652,7 @@ ScheduleCreationPopup.prototype._onClickSaveSchedule = function(target) {
                 start: start,
                 end: end,
                 isAllDay: isAllDay,
-                service: serviceId || this._schedule.serviceId,
+                serviceId: serviceId || this._schedule.serviceId,
                 triggerEventName: 'click',
                 id: this._schedule.id
             },

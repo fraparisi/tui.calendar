@@ -162,6 +162,7 @@ function createMonthView(baseController, layoutContainer, dragHandler, options) 
         if (options.useCreationPopup) {
             onShowEditPopup = function(eventData) {
                 createView.setCalendars(baseController.calendars);
+                createView.setServices(options.services);
                 createView.render(eventData);
             };
             createView.on('beforeUpdateSchedule', onEditSchedule);
