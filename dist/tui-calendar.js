@@ -19545,7 +19545,8 @@ ScheduleCreationPopup.prototype._selectDropdownMenuItem = function(target) {
     if (domutil.hasClass(dropdown, config.classname('section-services'))) {
         domutil.find('.' + iconClassName, dropdownBtn).style.backgroundColor = bgColor;
         this._selectedService = common.find(this.services, function(service) {
-            return service.id === domutil.getData(selectedItem, 'serviceId');
+            // eslint-disable-next-line eqeqeq
+            return service.id == domutil.getData(selectedItem, 'serviceId');
         });
     }
 
@@ -19742,7 +19743,8 @@ ScheduleCreationPopup.prototype._makeEditModeData = function(viewModel) {
     });
 
     viewModel.selectedService = this._selectedService = common.find(this.services, function(service) {
-        return service.id === viewModel.schedule.serviceId;
+        // eslint-disable-next-line eqeqeq
+        return service.id == viewModel.schedule.serviceId;
     });
 
     this._schedule = schedule;
