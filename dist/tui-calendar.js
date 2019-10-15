@@ -19538,7 +19538,7 @@ ScheduleCreationPopup.prototype._selectDropdownMenuItem = function(target) {
     if (domutil.hasClass(dropdown, config.classname('section-calendar'))) {
         domutil.find('.' + iconClassName, dropdownBtn).style.backgroundColor = bgColor;
         this._selectedCal = common.find(this.calendars, function(cal) {
-            return cal.id === domutil.getData(selectedItem, 'calendarId');
+            return !cal.isReadOnly && cal.id === domutil.getData(selectedItem, 'calendarId');
         });
     }
 
@@ -21470,8 +21470,6 @@ module.exports = (Handlebars['default'] || Handlebars).template({"1":function(co
 },"4":function(container,depth0,helpers,partials,data) {
     return "disabled";
 },"6":function(container,depth0,helpers,partials,data) {
-    return " checked";
-},"8":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=container.propertyIsEnumerable, alias2=depth0 != null ? depth0 : (container.nullContext || {}), alias3=container.hooks.helperMissing, alias4="function", alias5=container.escapeExpression;
 
   return "                    <li class=\""
@@ -21493,19 +21491,11 @@ module.exports = (Handlebars['default'] || Handlebars).template({"1":function(co
     + "content\">"
     + alias5(((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"name","hash":{},"data":data}) : helper)))
     + "</span>\n                    </li>\n";
-},"10":function(container,depth0,helpers,partials,data) {
-    var helper, alias1=container.propertyIsEnumerable;
-
-  return container.escapeExpression(((helper = (helper = helpers.state || (depth0 != null ? depth0.state : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"state","hash":{},"data":data}) : helper)));
-},"12":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=container.propertyIsEnumerable;
-
-  return ((stack1 = ((helper = (helper = helpers["popupStateBusy-tmpl"] || (depth0 != null ? depth0["popupStateBusy-tmpl"] : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"popupStateBusy-tmpl","hash":{},"data":data}) : helper))) != null ? stack1 : "");
-},"14":function(container,depth0,helpers,partials,data) {
+},"8":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=container.propertyIsEnumerable;
 
   return ((stack1 = ((helper = (helper = helpers["popupUpdate-tmpl"] || (depth0 != null ? depth0["popupUpdate-tmpl"] : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"popupUpdate-tmpl","hash":{},"data":data}) : helper))) != null ? stack1 : "");
-},"16":function(container,depth0,helpers,partials,data) {
+},"10":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=container.propertyIsEnumerable;
 
   return ((stack1 = ((helper = (helper = helpers["popupSave-tmpl"] || (depth0 != null ? depth0["popupSave-tmpl"] : depth0)) != null ? helper : container.hooks.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"popupSave-tmpl","hash":{},"data":data}) : helper))) != null ? stack1 : "");
@@ -21574,25 +21564,7 @@ module.exports = (Handlebars['default'] || Handlebars).template({"1":function(co
     + alias5(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"title","hash":{},"data":data}) : helper)))
     + "\" "
     + ((stack1 = helpers["if"].call(alias2,((stack1 = (depth0 != null ? depth0.selectedCal : depth0)) != null ? stack1.isReadOnly : stack1),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "/>\n            </div>\n        </div>\n        <!--        <div class=\""
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "popup-section\">-->\n        <!--            <div class=\""
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "popup-section-item "
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "section-location\">-->\n        <!--            <span class=\""
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "icon "
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "ic-location\"></span>-->\n        <!--                <input id=\""
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "schedule-location\" class=\""
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "content\" placeholder=\""
-    + alias5(((helper = (helper = helpers["locationPlaceholder-tmpl"] || (depth0 != null ? depth0["locationPlaceholder-tmpl"] : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"locationPlaceholder-tmpl","hash":{},"data":data}) : helper)))
-    + "\" value=\""
-    + alias5(((helper = (helper = helpers.location || (depth0 != null ? depth0.location : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"location","hash":{},"data":data}) : helper)))
-    + "\"></span>-->\n        <!--            </div>-->\n        <!--        </div>-->\n        <div class=\""
+    + "/>\n            </div>\n        </div>\n        <div class=\""
     + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
     + "popup-section\">\n            <div class=\""
     + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
@@ -21632,25 +21604,7 @@ module.exports = (Handlebars['default'] || Handlebars).template({"1":function(co
     + ((stack1 = helpers["if"].call(alias2,((stack1 = (depth0 != null ? depth0.selectedCal : depth0)) != null ? stack1.isReadOnly : stack1),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "/>\n                <div id=\""
     + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "endpicker-container\" style=\"margin-left: -1px; position: relative\"></div>\n            </div>\n            <!--            <div class=\""
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "popup-section-item "
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "section-allday\">-->\n            <!--                <input id=\""
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "schedule-allday\" type=\"checkbox\" class=\""
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "checkbox-square\""
-    + ((stack1 = helpers["if"].call(alias2,(depth0 != null ? depth0.isAllDay : depth0),{"name":"if","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "></input>-->\n            <!--                <span class=\""
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "icon "
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "ic-checkbox\"></span>-->\n            <!--                <span class=\""
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "content\">"
-    + ((stack1 = ((helper = (helper = helpers["popupIsAllDay-tmpl"] || (depth0 != null ? depth0["popupIsAllDay-tmpl"] : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"popupIsAllDay-tmpl","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "</span>-->\n            <!--            </div>-->\n        </div>\n        <div class=\""
+    + "endpicker-container\" style=\"margin-left: -1px; position: relative\"></div>\n            </div>\n        </div>\n        <div class=\""
     + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
     + "popup-section "
     + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
@@ -21687,64 +21641,8 @@ module.exports = (Handlebars['default'] || Handlebars).template({"1":function(co
     + "dropdown-menu\" style=\"z-index: "
     + alias5(((helper = (helper = helpers.zIndex || (depth0 != null ? depth0.zIndex : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"zIndex","hash":{},"data":data}) : helper)))
     + "\">\n"
-    + ((stack1 = helpers.each.call(alias2,(depth0 != null ? depth0.services : depth0),{"name":"each","hash":{},"fn":container.program(8, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "            </ul>\n        </div>\n        <!--        <div class=\""
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "popup-section "
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "dropdown "
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "close "
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "section-state\">-->\n        <!--            <button class=\""
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "button "
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "dropdown-button "
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "popup-section-item\">-->\n        <!--                <span class=\""
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "icon "
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "ic-state\"></span>-->\n        <!--                <span id=\""
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "schedule-state\" class=\""
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "content\">"
-    + ((stack1 = helpers["if"].call(alias2,(depth0 != null ? depth0.state : depth0),{"name":"if","hash":{},"fn":container.program(10, data, 0),"inverse":container.program(12, data, 0),"data":data})) != null ? stack1 : "")
-    + "</span>-->\n        <!--                <span class=\""
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "icon "
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "dropdown-arrow\"></span>-->\n        <!--            </button>-->\n        <!--            <ul class=\""
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "dropdown-menu\" style=\"z-index: "
-    + alias5(((helper = (helper = helpers.zIndex || (depth0 != null ? depth0.zIndex : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"zIndex","hash":{},"data":data}) : helper)))
-    + "\">-->\n        <!--                <li class=\""
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "popup-section-item "
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "dropdown-menu-item\">-->\n        <!--                <span class=\""
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "icon "
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "none\"></span>-->\n        <!--                <span class=\""
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "content\">"
-    + ((stack1 = ((helper = (helper = helpers["popupStateBusy-tmpl"] || (depth0 != null ? depth0["popupStateBusy-tmpl"] : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"popupStateBusy-tmpl","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "</span>-->\n        <!--                </li>-->\n        <!--                <li class=\""
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "popup-section-item "
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "dropdown-menu-item\">-->\n        <!--                <span class=\""
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "icon "
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "none\"></span>-->\n        <!--                <span class=\""
-    + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "content\">"
-    + ((stack1 = ((helper = (helper = helpers["popupStateFree-tmpl"] || (depth0 != null ? depth0["popupStateFree-tmpl"] : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"popupStateFree-tmpl","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "</span>-->\n        <!--                </li>-->\n        <!--            </ul>-->\n        <!--        </div>-->\n        <button class=\""
+    + ((stack1 = helpers.each.call(alias2,(depth0 != null ? depth0.services : depth0),{"name":"each","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "            </ul>\n        </div>\n        <button class=\""
     + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
     + "button "
     + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
@@ -21760,8 +21658,8 @@ module.exports = (Handlebars['default'] || Handlebars).template({"1":function(co
     + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
     + "confirm "
     + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "popup-save\"><span>"
-    + ((stack1 = helpers["if"].call(alias2,(depth0 != null ? depth0.isEditMode : depth0),{"name":"if","hash":{},"fn":container.program(14, data, 0),"inverse":container.program(16, data, 0),"data":data})) != null ? stack1 : "")
+    + "popup-save \"><span>"
+    + ((stack1 = helpers["if"].call(alias2,(depth0 != null ? depth0.isEditMode : depth0),{"name":"if","hash":{},"fn":container.program(8, data, 0),"inverse":container.program(10, data, 0),"data":data})) != null ? stack1 : "")
     + "</span></button>\n        </div>\n    </div>\n    <div id=\""
     + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
     + "popup-arrow\" class=\""
