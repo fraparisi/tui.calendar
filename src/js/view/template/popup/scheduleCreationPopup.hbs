@@ -10,7 +10,8 @@
             </button>
             <ul class="{{CSS_PREFIX}}dropdown-menu" style="z-index: {{zIndex}}">
                 {{#each calendars}}
-                    <li class="{{CSS_PREFIX}}popup-section-item {{CSS_PREFIX}}dropdown-menu-item {{#if isReadOnly}}disabled{{/if}}"
+                    <li class="{{CSS_PREFIX}}popup-section-item {{CSS_PREFIX}}dropdown-menu-item {{#if
+                            isReadOnly}}disabled{{/if}}"
                         data-calendar-id="{{id}}">
                         <span class="{{CSS_PREFIX}}icon {{CSS_PREFIX}}calendar-dot"
                               style="background-color: {{bgColor}}"></span>
@@ -23,7 +24,8 @@
             <div class="{{CSS_PREFIX}}popup-section-item {{CSS_PREFIX}}section-title">
                 <span class="{{CSS_PREFIX}}icon {{CSS_PREFIX}}ic-title"></span>
                 <input id="{{CSS_PREFIX}}schedule-title" class="{{CSS_PREFIX}}content"
-                       placeholder="{{titlePlaceholder-tmpl}}" value="{{title}}" {{#if selectedCal.isReadOnly}}disabled{{/if}}/>
+                       placeholder="{{titlePlaceholder-tmpl}}" value="{{title}}"
+                       {{#if selectedCal.isReadOnly}}disabled{{/if}}/>
             </div>
         </div>
         <div class="{{CSS_PREFIX}}popup-section">
@@ -41,25 +43,28 @@
                 <div id="{{CSS_PREFIX}}endpicker-container" style="margin-left: -1px; position: relative"></div>
             </div>
         </div>
-        <div class="{{CSS_PREFIX}}popup-section {{CSS_PREFIX}}dropdown {{CSS_PREFIX}}close {{CSS_PREFIX}}section-services{{#unless
-                services.length}} {{CSS_PREFIX}}hide{{/unless}}">
-            <button class="{{CSS_PREFIX}}button {{CSS_PREFIX}}dropdown-button {{CSS_PREFIX}}popup-section-item">
+        {{#if selectedCal.showServices}}
+            <div class="{{CSS_PREFIX}}popup-section {{CSS_PREFIX}}dropdown {{CSS_PREFIX}}close {{CSS_PREFIX}}section-services{{#unless
+                    services.length}} {{CSS_PREFIX}}hide{{/unless}}">
+                <button class="{{CSS_PREFIX}}button {{CSS_PREFIX}}dropdown-button {{CSS_PREFIX}}popup-section-item">
                 <span class="{{CSS_PREFIX}}icon {{CSS_PREFIX}}services-dot"
                       style="background-color: {{selectedCal.bgColor}}"></span>
-                <span id="{{CSS_PREFIX}}schedule-services" class="{{CSS_PREFIX}}content">{{selectedService.name}}</span>
-                <span class="{{CSS_PREFIX}}icon {{CSS_PREFIX}}dropdown-arrow"></span>
-            </button>
-            <ul class="{{CSS_PREFIX}}dropdown-menu" style="z-index: {{zIndex}}">
-                {{#each services}}
-                    <li class="{{CSS_PREFIX}}popup-section-item {{CSS_PREFIX}}dropdown-menu-item {{#if selectedCal.isReadOnly}}disabled{{/if}}"
-                        data-service-id="{{id}}">
+                    <span id="{{CSS_PREFIX}}schedule-services"
+                          class="{{CSS_PREFIX}}content">{{selectedService.name}}</span>
+                    <span class="{{CSS_PREFIX}}icon {{CSS_PREFIX}}dropdown-arrow"></span>
+                </button>
+                <ul class="{{CSS_PREFIX}}dropdown-menu" style="z-index: {{zIndex}}">
+                    {{#each services}}
+                        <li class="{{CSS_PREFIX}}popup-section-item {{CSS_PREFIX}}dropdown-menu-item"
+                            data-service-id="{{id}}">
                         <span class="{{CSS_PREFIX}}icon {{CSS_PREFIX}}service-dot"
                               style="background-color: {{bgColor}}"></span>
-                        <span class="{{CSS_PREFIX}}content">{{name}}</span>
-                    </li>
-                {{/each}}
-            </ul>
-        </div>
+                            <span class="{{CSS_PREFIX}}content">{{name}}</span>
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+        {{/if}}
         <button class="{{CSS_PREFIX}}button {{CSS_PREFIX}}popup-close"><span
                 class="{{CSS_PREFIX}}icon {{CSS_PREFIX}}ic-close"></span></button>
         <div class="{{CSS_PREFIX}}section-button-save">
