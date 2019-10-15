@@ -10173,8 +10173,13 @@ function createMonthView(baseController, layoutContainer, dragHandler, options) 
         detailView = new ScheduleDetailPopup(layoutContainer, baseController.calendars);
         onShowDetailPopup = function(eventData) {
             var scheduleId = eventData.schedule.calendarId;
+            var serviceId = eventData.schedule.serviceId;
+
             eventData.calendar = common.find(baseController.calendars, function(calendar) {
                 return calendar.id === scheduleId;
+            });
+            eventData.service = common.find(options.services, function(service) {
+                return service.id === serviceId;
             });
 
             if (options.isReadOnly) {
@@ -10288,6 +10293,7 @@ function createMonthView(baseController, layoutContainer, dragHandler, options) 
         showCreationPopup: function(eventData) {
             if (createView) {
                 createView.setCalendars(baseController.calendars);
+                createView.setServices(options.services);
                 createView.render(eventData);
             }
         },
@@ -17328,6 +17334,12 @@ function Schedule() {
     this.calendarId = '';
 
     /**
+     * service ID
+     * @type {string}
+     */
+    this.serviceId = '';
+
+    /**
      * Schedule category(milestone, task, allday, time)
      * @type {string}
      */
@@ -17461,6 +17473,7 @@ Schedule.prototype.init = function(options) {
     this.dragBgColor = options.dragBgColor || this.dragBgColor;
     this.borderColor = options.borderColor || this.borderColor;
     this.calendarId = options.calendarId || '';
+    this.serviceId = options.serviceId || '';
     this.category = options.category || '';
     this.dueDateClass = options.dueDateClass || '';
     this.customStyle = options.customStyle || '';
@@ -19591,8 +19604,8 @@ ScheduleCreationPopup.prototype._toggleIsPrivate = function(target) {
 ScheduleCreationPopup.prototype._onClickSaveSchedule = function(target) {
     var className = config.classname('popup-save');
     var cssPrefix = config.cssPrefix;
-    var title, service, isAllDay, startDate, endDate;
-    var start, end, calendarId;
+    var title, isAllDay, startDate, endDate;
+    var start, end, calendarId, serviceId;
 
     if (!domutil.hasClass(target, className) && !domutil.closest(target, '.' + className)) {
         return false;
@@ -19612,7 +19625,6 @@ ScheduleCreationPopup.prototype._onClickSaveSchedule = function(target) {
         return true;
     }
 
-    service = domutil.get(cssPrefix + 'schedule-services');
     isAllDay = !!domutil.get(cssPrefix + 'schedule-allday').checked;
 
     if (isAllDay) {
@@ -19627,6 +19639,10 @@ ScheduleCreationPopup.prototype._onClickSaveSchedule = function(target) {
         calendarId = this._selectedCal.id;
     }
 
+    if (this._selectedService) {
+        serviceId = this._selectedService.id;
+    }
+
     if (this._isEditMode) {
         this.fire('beforeUpdateSchedule', {
             schedule: {
@@ -19635,13 +19651,14 @@ ScheduleCreationPopup.prototype._onClickSaveSchedule = function(target) {
                 start: start,
                 end: end,
                 isAllDay: isAllDay,
-                service: service.innerText,
+                service: serviceId || this._schedule.serviceId,
                 triggerEventName: 'click',
                 id: this._schedule.id
             },
             start: start,
             end: end,
             calendar: this._selectedCal,
+            service: this._selectedService,
             triggerEventName: 'click'
         });
     } else {
@@ -19656,7 +19673,7 @@ ScheduleCreationPopup.prototype._onClickSaveSchedule = function(target) {
             start: start,
             end: end,
             isAllDay: isAllDay,
-            service: service.innerText
+            service: serviceId
         });
     }
 
@@ -19718,6 +19735,7 @@ ScheduleCreationPopup.prototype._makeEditModeData = function(viewModel) {
     var schedule = viewModel.schedule;
     var title, service, startDate, endDate, isAllDay;
     var calendars = this.calendars;
+    var services = this.services;
 
     var id = schedule.id;
     title = schedule.title;
@@ -19740,6 +19758,7 @@ ScheduleCreationPopup.prototype._makeEditModeData = function(viewModel) {
         id: id,
         selectedCal: this._selectedCal,
         calendars: calendars,
+        services: services,
         title: title,
         service: service,
         isAllDay: isAllDay,

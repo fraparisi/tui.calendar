@@ -112,6 +112,12 @@ function Schedule() {
     this.calendarId = '';
 
     /**
+     * service ID
+     * @type {string}
+     */
+    this.serviceId = '';
+
+    /**
      * Schedule category(milestone, task, allday, time)
      * @type {string}
      */
@@ -245,6 +251,7 @@ Schedule.prototype.init = function(options) {
     this.dragBgColor = options.dragBgColor || this.dragBgColor;
     this.borderColor = options.borderColor || this.borderColor;
     this.calendarId = options.calendarId || '';
+    this.serviceId = options.serviceId || '';
     this.category = options.category || '';
     this.dueDateClass = options.dueDateClass || '';
     this.customStyle = options.customStyle || '';

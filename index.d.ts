@@ -170,6 +170,7 @@ export interface IMonthOptions {
 export interface ISchedule {
     id?: string;
     calendarId?: string;
+    serviceId?: string;
     title?: string;
     body?: string;
     start?: DateType;

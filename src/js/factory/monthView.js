@@ -131,8 +131,13 @@ function createMonthView(baseController, layoutContainer, dragHandler, options) 
         detailView = new ScheduleDetailPopup(layoutContainer, baseController.calendars);
         onShowDetailPopup = function(eventData) {
             var scheduleId = eventData.schedule.calendarId;
+            var serviceId = eventData.schedule.serviceId;
+
             eventData.calendar = common.find(baseController.calendars, function(calendar) {
                 return calendar.id === scheduleId;
+            });
+            eventData.service = common.find(options.services, function(service) {
+                return service.id === serviceId;
             });
 
             if (options.isReadOnly) {
@@ -246,6 +251,7 @@ function createMonthView(baseController, layoutContainer, dragHandler, options) 
         showCreationPopup: function(eventData) {
             if (createView) {
                 createView.setCalendars(baseController.calendars);
+                createView.setServices(options.services);
                 createView.render(eventData);
             }
         },
