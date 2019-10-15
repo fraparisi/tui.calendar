@@ -19605,7 +19605,7 @@ ScheduleCreationPopup.prototype._toggleIsPrivate = function(target) {
 ScheduleCreationPopup.prototype._onClickSaveSchedule = function(target) {
     var className = config.classname('popup-save');
     var cssPrefix = config.cssPrefix;
-    var title, isAllDay, startDate, endDate;
+    var title, startDate, endDate;
     var start, end, calendarId, serviceId;
 
     if (!domutil.hasClass(target, className) && !domutil.closest(target, '.' + className)) {
@@ -19644,7 +19644,7 @@ ScheduleCreationPopup.prototype._onClickSaveSchedule = function(target) {
                 title: title.value,
                 start: start,
                 end: end,
-                isAllDay: isAllDay,
+                isAllDay: false,
                 serviceId: serviceId || this._schedule.serviceId,
                 triggerEventName: 'click',
                 id: this._schedule.id
@@ -19667,7 +19667,7 @@ ScheduleCreationPopup.prototype._onClickSaveSchedule = function(target) {
             start: start,
             end: end,
             isAllDay: false,
-            service: serviceId
+            serviceId: serviceId
         });
     }
 
@@ -19727,7 +19727,7 @@ ScheduleCreationPopup.prototype.render = function(viewModel) {
  */
 ScheduleCreationPopup.prototype._makeEditModeData = function(viewModel) {
     var schedule = viewModel.schedule;
-    var title, service, startDate, endDate, isAllDay;
+    var title, startDate, endDate, isAllDay;
     var calendars = this.calendars;
     var services = this.services;
 
@@ -19736,14 +19736,13 @@ ScheduleCreationPopup.prototype._makeEditModeData = function(viewModel) {
     startDate = schedule.start;
     endDate = schedule.end;
     isAllDay = schedule.isAllDay;
-    service = schedule.service;
 
     viewModel.selectedCal = this._selectedCal = common.find(this.calendars, function(cal) {
         return cal.id === viewModel.schedule.calendarId;
     });
 
-    viewModel.selectedService = this._selectedService = common.find(this.services, function(serv) {
-        return serv.id === viewModel.schedule.service;
+    viewModel.selectedService = this._selectedService = common.find(this.services, function(service) {
+        return service.id === viewModel.schedule.serviceId;
     });
 
     this._schedule = schedule;
@@ -19754,7 +19753,7 @@ ScheduleCreationPopup.prototype._makeEditModeData = function(viewModel) {
         calendars: calendars,
         services: services,
         title: title,
-        service: service,
+        selectedService: this._selectedService,
         isAllDay: isAllDay,
         start: startDate,
         end: endDate,
