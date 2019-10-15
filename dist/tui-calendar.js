@@ -21542,7 +21542,7 @@ module.exports = (Handlebars['default'] || Handlebars).template({"1":function(co
     + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
     + "icon "
     + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "dropdown-arrow\"></span>\n                </span>\n            </button>\n            <ul class=\""
+    + "dropdown-arrow\"></span>\n            </button>\n            <ul class=\""
     + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
     + "dropdown-menu\" style=\"z-index: "
     + alias5(((helper = (helper = helpers.zIndex || (depth0 != null ? depth0.zIndex : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"zIndex","hash":{},"data":data}) : helper)))
@@ -21658,19 +21658,19 @@ module.exports = (Handlebars['default'] || Handlebars).template({"1":function(co
     + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
     + "icon "
     + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "calendar-dot\"\n                      style=\"background-color: "
+    + "services-dot\"\n                      style=\"background-color: "
     + alias5(alias6(((stack1 = (depth0 != null ? depth0.selectedCal : depth0)) != null ? stack1.bgColor : stack1), depth0))
     + "\"></span>\n                <span id=\""
     + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
     + "schedule-services\" class=\""
     + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
     + "content\">"
-    + alias5(alias6(((stack1 = (depth0 != null ? depth0.selectedServices : depth0)) != null ? stack1.name : stack1), depth0))
+    + alias5(alias6(((stack1 = (depth0 != null ? depth0.selectedService : depth0)) != null ? stack1.name : stack1), depth0))
     + "</span>\n                <span class=\""
     + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
     + "icon "
     + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
-    + "dropdown-arrow\"></span>\n                </span>\n            </button>\n            <ul class=\""
+    + "dropdown-arrow\"></span>\n            </button>\n            <ul class=\""
     + alias5(((helper = (helper = helpers.CSS_PREFIX || (depth0 != null ? depth0.CSS_PREFIX : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"CSS_PREFIX","hash":{},"data":data}) : helper)))
     + "dropdown-menu\" style=\"z-index: "
     + alias5(((helper = (helper = helpers.zIndex || (depth0 != null ? depth0.zIndex : depth0)) != null ? helper : alias3),(typeof helper === alias4 ? helper.call(alias2,{"name":"zIndex","hash":{},"data":data}) : helper)))

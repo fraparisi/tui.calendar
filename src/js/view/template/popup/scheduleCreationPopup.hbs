@@ -7,7 +7,6 @@
                       style="background-color: {{selectedCal.bgColor}}"></span>
                 <span id="{{CSS_PREFIX}}schedule-calendar" class="{{CSS_PREFIX}}content">{{selectedCal.name}}</span>
                 <span class="{{CSS_PREFIX}}icon {{CSS_PREFIX}}dropdown-arrow"></span>
-                </span>
             </button>
             <ul class="{{CSS_PREFIX}}dropdown-menu" style="z-index: {{zIndex}}">
                 {{#each calendars}}
@@ -57,11 +56,10 @@
         <div class="{{CSS_PREFIX}}popup-section {{CSS_PREFIX}}dropdown {{CSS_PREFIX}}close {{CSS_PREFIX}}section-services{{#unless
                 services.length}} {{CSS_PREFIX}}hide{{/unless}}">
             <button class="{{CSS_PREFIX}}button {{CSS_PREFIX}}dropdown-button {{CSS_PREFIX}}popup-section-item">
-                <span class="{{CSS_PREFIX}}icon {{CSS_PREFIX}}calendar-dot"
+                <span class="{{CSS_PREFIX}}icon {{CSS_PREFIX}}services-dot"
                       style="background-color: {{selectedCal.bgColor}}"></span>
-                <span id="{{CSS_PREFIX}}schedule-services" class="{{CSS_PREFIX}}content">{{selectedServices.name}}</span>
+                <span id="{{CSS_PREFIX}}schedule-services" class="{{CSS_PREFIX}}content">{{selectedService.name}}</span>
                 <span class="{{CSS_PREFIX}}icon {{CSS_PREFIX}}dropdown-arrow"></span>
-                </span>
             </button>
             <ul class="{{CSS_PREFIX}}dropdown-menu" style="z-index: {{zIndex}}">
                 {{#each services}}
