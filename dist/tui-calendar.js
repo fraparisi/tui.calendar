@@ -19524,7 +19524,7 @@ ScheduleCreationPopup.prototype._selectDropdownMenuItem = function(target) {
     var selectedItem = domutil.hasClass(target, itemClassName) ? target : domutil.closest(target, '.' + itemClassName);
     var bgColor, title, dropdown, dropdownBtn;
 
-    if (!selectedItem) {
+    if (!selectedItem || selectedItem.classList.contains('disabled')) {
         return false;
     }
 
@@ -19538,7 +19538,7 @@ ScheduleCreationPopup.prototype._selectDropdownMenuItem = function(target) {
     if (domutil.hasClass(dropdown, config.classname('section-calendar'))) {
         domutil.find('.' + iconClassName, dropdownBtn).style.backgroundColor = bgColor;
         this._selectedCal = common.find(this.calendars, function(cal) {
-            return !cal.isReadOnly && cal.id === domutil.getData(selectedItem, 'calendarId');
+            return cal.id === domutil.getData(selectedItem, 'calendarId');
         });
     }
 
@@ -19728,7 +19728,7 @@ ScheduleCreationPopup.prototype.render = function(viewModel) {
  */
 ScheduleCreationPopup.prototype._makeEditModeData = function(viewModel) {
     var schedule = viewModel.schedule;
-    var title, startDate, endDate, isAllDay;
+    var title, startDate, endDate;
     var calendars = this.calendars;
     var services = this.services;
 
@@ -19736,10 +19736,9 @@ ScheduleCreationPopup.prototype._makeEditModeData = function(viewModel) {
     title = schedule.title;
     startDate = schedule.start;
     endDate = schedule.end;
-    isAllDay = schedule.isAllDay;
 
     viewModel.selectedCal = this._selectedCal = common.find(this.calendars, function(cal) {
-        return cal.id === viewModel.schedule.calendarId;
+        return !cal.isReadOnly && cal.id === viewModel.schedule.calendarId;
     });
 
     viewModel.selectedService = this._selectedService = common.find(this.services, function(service) {
@@ -19756,7 +19755,7 @@ ScheduleCreationPopup.prototype._makeEditModeData = function(viewModel) {
         services: services,
         title: title,
         selectedService: this._selectedService,
-        isAllDay: isAllDay,
+        isAllDay: false,
         start: startDate,
         end: endDate,
         zIndex: this.layer.zIndex + 5,
