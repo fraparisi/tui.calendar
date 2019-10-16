@@ -4,8 +4,8 @@
             <div>
                 <span class="{{CSS_PREFIX}}schedule-private {{CSS_PREFIX}}icon {{CSS_PREFIX}}ic-private"></span>
                 <span class="{{CSS_PREFIX}}schedule-title">{{schedule.title}}</span>
-                {{#if schedule.service}}
-                    <span class="{{CSS_PREFIX}}schedule-service">{{schedule.service.name}}</span>
+                {{#if service}}
+                    <span class="{{CSS_PREFIX}}schedule-service">{{service.name}}</span>
                 {{/if}}
             </div>
             <div class="{{CSS_PREFIX}}popup-detail-date {{CSS_PREFIX}}content">{{{popupDetailDate-tmpl schedule.isAllDay
@@ -45,9 +45,9 @@
                         class="{{CSS_PREFIX}}icon {{CSS_PREFIX}}ic-edit"></span><span
                         class="{{CSS_PREFIX}}content">{{{popupEdit-tmpl}}}</span></button>
                 <div class="{{CSS_PREFIX}}popup-vertical-line"></div>
-                <button class="{{CSS_PREFIX}}popup-delete"><span
-                        class="{{CSS_PREFIX}}icon {{CSS_PREFIX}}ic-delete"></span><span
-                        class="{{CSS_PREFIX}}content">{{{popupDelete-tmpl}}}</span></button>
+<!--                <button class="{{CSS_PREFIX}}popup-delete"><span-->
+<!--                        class="{{CSS_PREFIX}}icon {{CSS_PREFIX}}ic-delete"></span><span-->
+<!--                        class="{{CSS_PREFIX}}content">{{{popupDelete-tmpl}}}</span></button>-->
             </div>
         {{/if}}
     </div>
