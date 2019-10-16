@@ -137,7 +137,8 @@ function createMonthView(baseController, layoutContainer, dragHandler, options) 
                 return calendar.id === scheduleId;
             });
             eventData.service = common.find(options.services, function(service) {
-                return service.id === serviceId;
+                // eslint-disable-next-line eqeqeq
+                return service.id == serviceId;
             });
 
             if (options.isReadOnly) {

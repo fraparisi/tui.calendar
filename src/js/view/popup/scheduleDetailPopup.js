@@ -32,6 +32,7 @@ function ScheduleDetailPopup(container) {
     this._viewModel = null;
     this._schedule = null;
     this._calendar = null;
+    this._service = null;
 
     domevent.on(container, 'click', this._onClick, this);
 }
@@ -122,13 +123,15 @@ ScheduleDetailPopup.prototype.render = function(viewModel) {
 
     layer.setContent(tmpl({
         schedule: viewModel.schedule,
-        calendar: viewModel.calendar
+        calendar: viewModel.calendar,
+        service: viewModel.service
     }));
     layer.show();
     this._setPopupPositionAndArrowDirection(viewModel.event);
 
     this._schedule = viewModel.schedule;
     this._calendar = viewModel.calendar;
+    this._service = viewModel.service;
 
     util.debounce(function() {
         domevent.on(document.body, 'mousedown', self._onMouseDown, self);
