@@ -44,26 +44,28 @@
             </div>
         </div>
         {{#if selectedCal.showServices}}
-            <div class="{{CSS_PREFIX}}popup-section {{CSS_PREFIX}}dropdown {{CSS_PREFIX}}close {{CSS_PREFIX}}section-services{{#unless
-                    services.length}} {{CSS_PREFIX}}hide{{/unless}}">
-                <button class="{{CSS_PREFIX}}button {{CSS_PREFIX}}dropdown-button {{CSS_PREFIX}}popup-section-item">
+            {{#unless isEditMode}}
+                <div class="{{CSS_PREFIX}}popup-section {{CSS_PREFIX}}dropdown {{CSS_PREFIX}}close {{CSS_PREFIX}}section-services{{#unless
+                        services.length}} {{CSS_PREFIX}}hide{{/unless}}">
+                    <button class="{{CSS_PREFIX}}button {{CSS_PREFIX}}dropdown-button {{CSS_PREFIX}}popup-section-item">
                 <span class="{{CSS_PREFIX}}icon {{CSS_PREFIX}}services-dot"
                       style="background-color: {{selectedCal.bgColor}}"></span>
-                    <span id="{{CSS_PREFIX}}schedule-services"
-                          class="{{CSS_PREFIX}}content">{{selectedService.name}}</span>
-                    <span class="{{CSS_PREFIX}}icon {{CSS_PREFIX}}dropdown-arrow"></span>
-                </button>
-                <ul class="{{CSS_PREFIX}}dropdown-menu" style="z-index: {{zIndex}}">
-                    {{#each services}}
-                        <li class="{{CSS_PREFIX}}popup-section-item {{CSS_PREFIX}}dropdown-menu-item"
-                            data-service-id="{{id}}">
+                        <span id="{{CSS_PREFIX}}schedule-services"
+                              class="{{CSS_PREFIX}}content">{{selectedService.name}}</span>
+                        <span class="{{CSS_PREFIX}}icon {{CSS_PREFIX}}dropdown-arrow"></span>
+                    </button>
+                    <ul class="{{CSS_PREFIX}}dropdown-menu" style="z-index: {{zIndex}}">
+                        {{#each services}}
+                            <li class="{{CSS_PREFIX}}popup-section-item {{CSS_PREFIX}}dropdown-menu-item"
+                                data-service-id="{{id}}">
                         <span class="{{CSS_PREFIX}}icon {{CSS_PREFIX}}service-dot"
                               style="background-color: {{bgColor}}"></span>
-                            <span class="{{CSS_PREFIX}}content">{{name}}</span>
-                        </li>
-                    {{/each}}
-                </ul>
-            </div>
+                                <span class="{{CSS_PREFIX}}content">{{name}}</span>
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            {{/unless}}
         {{/if}}
         <button class="{{CSS_PREFIX}}button {{CSS_PREFIX}}popup-close"><span
                 class="{{CSS_PREFIX}}icon {{CSS_PREFIX}}ic-close"></span></button>
