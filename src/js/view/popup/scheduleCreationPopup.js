@@ -560,6 +560,25 @@ ScheduleCreationPopup.prototype._setArrowDirection = function(arrow) {
  */
 ScheduleCreationPopup.prototype._createDatepicker = function(start, end, isAllDay) {
     var cssPrefix = config.cssPrefix;
+    DatePicker.localeTexts.it = {
+        titles: {
+            // days
+            DD: ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'],
+            // daysShort
+            D: ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ve', 'Sa'],
+            // months
+            MMMM: [
+                'Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno',
+                'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'
+            ],
+            // monthsShort
+            MMM: ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic']
+        },
+        titleFormat: 'MMM yyyy',
+        todayFormat: 'D, MMMM dd, yyyy',
+        date: 'Data',
+        time: 'Ora'
+    };
 
     this.rangePicker = DatePicker.createRangePicker({
         startpicker: {
@@ -572,8 +591,10 @@ ScheduleCreationPopup.prototype._createDatepicker = function(start, end, isAllDa
             input: '#' + cssPrefix + 'schedule-end-date',
             container: '#' + cssPrefix + 'endpicker-container'
         },
-        format: isAllDay ? 'yyyy-MM-dd' : 'yyyy-MM-dd HH:mm',
+        language: 'it',
+        format: isAllDay ? 'dd/MM/yyyy' : 'dd/MM/yyyy hh:mm',
         timepicker: isAllDay ? null : {
+            format: 'hh:mm',
             showMeridiem: false,
             usageStatistics: this._usageStatistics
         },
