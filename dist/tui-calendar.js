@@ -1,6 +1,6 @@
 /*!
  * TOAST UI Calendar
- * @version 1.12.5 | Fri Oct 18 2019
+ * @version 1.12.5 | Tue Nov 05 2019
  * @author NHN FE Development Lab <dl_javascript@nhn.com>
  * @license MIT
  */
@@ -10555,7 +10555,8 @@ module.exports = function(baseController, layoutContainer, dragHandler, options,
 
     // binding create schedules event
     if (options.useCreationPopup) {
-        createView = new ScheduleCreationPopup(layoutContainer, baseController.calendars, options.usageStatistics);
+        createView = new ScheduleCreationPopup(layoutContainer,
+            baseController.calendars, options.usageStatistics, options.services);
 
         onSaveNewSchedule = function(scheduleData) {
             util.extend(scheduleData, {
@@ -10583,8 +10584,13 @@ module.exports = function(baseController, layoutContainer, dragHandler, options,
         detailView = new ScheduleDetailPopup(layoutContainer, baseController.calendars);
         onShowDetailPopup = function(eventData) {
             var scheduleId = eventData.schedule.calendarId;
+            var serviceId = eventData.schedule.serviceId;
             eventData.calendar = common.find(baseController.calendars, function(calendar) {
                 return calendar.id === scheduleId;
+            });
+            eventData.service = common.find(options.services, function(service) {
+                // eslint-disable-next-line eqeqeq
+                return service.id == serviceId;
             });
 
             if (options.isReadOnly) {
@@ -10613,9 +10619,9 @@ module.exports = function(baseController, layoutContainer, dragHandler, options,
         });
         if (options.useCreationPopup) {
             onShowEditPopup = function(eventData) {
-                var calendars = baseController.calendars;
                 eventData.isEditMode = true;
-                createView.setCalendars(calendars);
+                createView.setCalendars(baseController.calendars);
+                createView.setServices(options.services);
                 createView.render(eventData);
             };
             createView.on('beforeUpdateSchedule', onEditSchedule);
@@ -10686,6 +10692,7 @@ module.exports = function(baseController, layoutContainer, dragHandler, options,
         showCreationPopup: function(eventData) {
             if (createView) {
                 createView.setCalendars(baseController.calendars);
+                createView.setServices(options.services);
                 createView.render(eventData);
             }
         }

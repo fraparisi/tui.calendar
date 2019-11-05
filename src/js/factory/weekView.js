@@ -297,9 +297,8 @@ module.exports = function(baseController, layoutContainer, dragHandler, options,
         });
         if (options.useCreationPopup) {
             onShowEditPopup = function(eventData) {
-                var calendars = baseController.calendars;
                 eventData.isEditMode = true;
-                createView.setCalendars(calendars);
+                createView.setCalendars(baseController.calendars);
                 createView.setServices(options.services);
                 createView.render(eventData);
             };
