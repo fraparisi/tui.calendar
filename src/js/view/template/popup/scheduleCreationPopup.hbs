@@ -10,13 +10,15 @@
             </button>
             <ul class="{{CSS_PREFIX}}dropdown-menu" style="z-index: {{zIndex}}">
                 {{#each calendars}}
-                    <li class="{{CSS_PREFIX}}popup-section-item {{CSS_PREFIX}}dropdown-menu-item {{#if
-                            isReadOnly}}disabled{{/if}}"
+                    {{#if isReadOnly}}
+                    {{else}}
+                    <li class="{{CSS_PREFIX}}popup-section-item {{CSS_PREFIX}}dropdown-menu-item"
                         data-calendar-id="{{id}}">
                         <span class="{{CSS_PREFIX}}icon {{CSS_PREFIX}}calendar-dot"
                               style="background-color: {{bgColor}}"></span>
                         <span class="{{CSS_PREFIX}}content">{{name}}</span>
                     </li>
+                    {{/if}}
                 {{/each}}
             </ul>
         </div>
